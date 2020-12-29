@@ -9,7 +9,7 @@ Departemen  :   Teknologi Informasi
 ```
 ## Topologi yang Diberikan
 
-![]()
+![](https://github.com/Bhaskaraa/Jarkom_Modul5_Lapres_T11/blob/main/Modul%205/Screenshot%202020-12-29%20235456.png)
 
 Dengan keterangan pada soal :
 - SURABAYA diberikan IP TUNTAP
