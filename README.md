@@ -52,11 +52,11 @@ xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,swit
 
 ## Subnetting dengan Metode VLSM
 
-![]()
+![](https://github.com/Bhaskaraa/Jarkom_Modul5_Lapres_T11/blob/main/Modul%205/Subnetting.png)
 
 ## Pohon VLSM
 
-![]()
+![](https://github.com/Bhaskaraa/Jarkom_Modul5_Lapres_T11/blob/main/Modul%205/Pohon%20VLSM.png)
 
 ## SURABAYA sebagai Router
 - Interfaces
