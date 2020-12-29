@@ -48,7 +48,7 @@ xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,swit
 ```
 - bye.sh
 
-![]()
+![](https://github.com/Bhaskaraa/Jarkom_Modul5_Lapres_T11/blob/main/Modul%205/bye.png)
 
 ## Subnetting dengan Metode VLSM
 
@@ -230,33 +230,35 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 - Kemudian, restart DHCP Server dengan command `service isc-dhcp-server restart`
 
 ## Soal 1
-Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi SURABAYA menggunakan iptables, namun Bibah tidak ingin kalian menggunakan MASQUERADE. Solusi yang dapat berikan adalah melalui syntax berikut.
+Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi SURABAYA menggunakan iptables, namun Bibah tidak ingin kalian menggunakan MASQUERADE. Solusi yang dapat berikan adalah melalui syntax berikut. \
 `iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o eth0 -j SNAT --to-source 10.151.74.74 #surabaya `
-- Testing
-![]()
+- Testing, dengan melakukan ping google.com di Surabaya
+![](https://github.com/Bhaskaraa/Jarkom_Modul5_Lapres_T11/blob/main/Modul%205/nomor1.jpg)
 
 ## Soal 2
-Kalian diminta untuk mendrop semua akses SSH dari luar Topologi (UML) Kalian pada server yang memiliki ip DMZ (DHCP dan DNS SERVER) pada SURABAYA demi menjaga keamanan. Solusi yang dapat diberikan adalah melalui syntax berikut.
+Kalian diminta untuk mendrop semua akses SSH dari luar Topologi (UML) Kalian pada server yang memiliki ip DMZ (DHCP dan DNS SERVER) pada SURABAYA demi menjaga keamanan. Solusi yang dapat diberikan adalah melalui syntax berikut. \
 `iptables -A FORWARD -d 10.151.77.137/29 -i eth0 -p tcp --dport 22 -j DROP #surabaya`
 
 ## Soal 3
-Karena tim kalian maksimal terdiri dari 3 orang, Bibah meminta kalian untuk membatasi DHCP dan DNS server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan yang berasal dari mana saja menggunakan iptables pada masing masing server, selebihnya akan di DROP. Solusi yang dapat diberikan adalah sebagai berikut.
+Karena tim kalian maksimal terdiri dari 3 orang, Bibah meminta kalian untuk membatasi DHCP dan DNS server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan yang berasal dari mana saja menggunakan iptables pada masing masing server, selebihnya akan di DROP. Solusi yang dapat diberikan adalah sebagai berikut. \
 `iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP #malang dan mojokerto`
 
 ## Soal 4
-Akses dari subnet SIDOARJO hanya diperbolehkan pada pukul 07.00 - 17.00 pada hari Senin sampai Jumat. Solusi yang dapat diberikan adalah melalui syntax sebagai berikut.
-`iptables -A INPUT -s 192.168.0.0/24 -m time --timestart 07:00 --timestop 17:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
-iptables -A INPUT -s 192.168.0.0/24 -j REJECT #malang`
+Akses dari subnet SIDOARJO hanya diperbolehkan pada pukul 07.00 - 17.00 pada hari Senin sampai Jumat. Solusi yang dapat diberikan adalah melalui syntax sebagai berikut. \
+`iptables -A INPUT -s 192.168.0.0/24 -m time --timestart 07:00 --timestop 17:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT` \
+`iptables -A INPUT -s 192.168.0.0/24 -j REJECT #malang`
 
 ## Soal 5
-Akses dari subnet GRESIK hanya diperbolehkan pada pukul 17.00 hingga pukul 07.00 setiap harinya. Solusi yang dapat diberikan adalah melalui syntax berikut.
+Akses dari subnet GRESIK hanya diperbolehkan pada pukul 17.00 hingga pukul 07.00 setiap harinya. Solusi yang dapat diberikan adalah melalui syntax berikut. \
 `iptables -A INPUT -s 192.168.1.0/24 -m time --timestart 06:59 --timestop 16:59 -j REJECT #malang`
 
 ## Soal 6
-Karena kita memiliki 2 buah WEB Server, Bibah ingin SURABAYA disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada PROBOLINGGO port 80 dan MADIUN port 80. Solusi yang dapat diberikan adalah melalui syntax sebagai berikut.
-`#surabaya
+Karena kita memiliki 2 buah WEB Server, Bibah ingin SURABAYA disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada PROBOLINGGO port 80 dan MADIUN port 80. Solusi yang dapat diberikan adalah melalui syntax sebagai berikut.\
+```
+#surabaya
 iptables -t nat -A PREROUTING -p tcp -d 10.151.83.146 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.168.2.11:80
-iptables -t nat -A PREROUTING -p tcp -d 10.151.83.146 -j DNAT --to-destination 192.168.2.10:80`
+iptables -t nat -A PREROUTING -p tcp -d 10.151.83.146 -j DNAT --to-destination 192.168.2.10:80
+```
 
 ## Soal 7
 Bibah ingin agar semua paket didrop oleh firewall (dalam topologi) tercatat dalam log pada setiap UML yang memiliki aturan drop. Solusi yang dapat diberikan adalah sebagai berikut.
