@@ -233,6 +233,7 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi SURABAYA menggunakan iptables, namun Bibah tidak ingin kalian menggunakan MASQUERADE. Solusi yang dapat berikan adalah melalui syntax berikut. \
 `iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o eth0 -j SNAT --to-source 10.151.74.74 #surabaya `
 - Testing, dengan melakukan ping google.com di Surabaya
+
 ![](https://github.com/Bhaskaraa/Jarkom_Modul5_Lapres_T11/blob/main/Modul%205/nomor1.jpg)
 
 ## Soal 2
